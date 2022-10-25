@@ -126,6 +126,21 @@ runcmd:
   # get the recommended nginx security parameter for certbot using curl:
   - curl -sSLo ${tmp_folder_path}/docker/nginx/conf.d/options-ssl-nginx.conf https://raw.githubusercontent.com/certbot/certbot/master/certbot-nginx/certbot_nginx/_internal/tls_configs/options-ssl-nginx.conf
 
+  - printf '\n\n=======\n'
+  - echo 'ADDING APT FOR MARIADB'
+  - printf '=======\n\n'
+  - |
+    curl -fsSL https://mariadb.org/mariadb_release_signing_key.asc | \
+    gpg --dearmor | \
+    tee /usr/share/keyrings/mariadb.gpg > /dev/null
+  - |
+    echo "deb [arch=$(dpkg --print-architecture) \
+    signed-by=/usr/share/keyrings/mariadb.gpg] \
+    http://mirror.mariadb.org/repo/10.6/debian/ \
+    $(lsb_release -cs) main" |\
+    tee /etc/apt/sources.list.d/mariadb.list
+  - apt update -yq
+
   ## TODO: this is a good idea but maybe paranoid, but definitely a PITA during development
   # - printf '\n\n=======\n'
   # - echo 'CHANGE PASSWDS'

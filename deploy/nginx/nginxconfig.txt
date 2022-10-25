@@ -1,0 +1,1 @@
+https://www.digitalocean.com/community/tools/nginx?domains.0.server.redirectSubdomains=false&domains.0.php.wordPressRules=true&domains.0.routing.index=index.html&domains.0.logging.accessLog=true&domains.0.logging.errorLog=true&global.nginx.user=dane

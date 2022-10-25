@@ -108,16 +108,15 @@ runcmd:
   - echo 'INSTALLING NGINX'
   - printf '=======\n\n'
   - |
-    wget -O- https://nginx.org/keys/nginx_signing.key | \
+    curl -fsSL https://nginx.org/keys/nginx_signing.key | \
     gpg --dearmor | \
     tee /usr/share/keyrings/nginx.gpg > /dev/null
   - |
     echo "deb [arch=$(dpkg --print-architecture) \
     signed-by=/usr/share/keyrings/nginx.gpg] \
-    https://nginx.org/packages/ubuntu/ \
-    $(lsb_release -cs) stable" |\
+    http://nginx.org/packages/debian \
+    $(lsb_release -cs) nginx" |\
     tee /etc/apt/sources.list.d/nginx.list
-  
   - apt update -yq
   - apt install -yq nginx
 

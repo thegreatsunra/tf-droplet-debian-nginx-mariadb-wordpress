@@ -1,3 +1,7 @@
+# Digital Ocean Droplet + WordPress/MariaDB/Nginx
+
+> Together at last
+
 ## Usage
 
 1. Generate and add your Digital Ocean and Cloudflare API tokens

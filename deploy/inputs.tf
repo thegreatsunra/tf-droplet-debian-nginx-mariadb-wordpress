@@ -56,15 +56,6 @@ variable "tmp_folder_path" {
   default = "/tmp_cloudinit"
 }
 
-variable "docker_volume_folder_name" {
-  type    = string
-  default = "docker"
-  validation {
-    condition     = length(regexall("[^-_a-z0-9]+", var.docker_volume_folder_name)) == 0
-    error_message = "Folder name can only contain the following characters: a-z, 0-9, -, _"
-  }
-}
-
 variable "user_full_name" {
   type = string
 }

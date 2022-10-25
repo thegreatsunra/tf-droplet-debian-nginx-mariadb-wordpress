@@ -141,6 +141,21 @@ runcmd:
     tee /etc/apt/sources.list.d/mariadb.list
   - apt update -yq
 
+  - printf '\n\n=======\n'
+  - echo 'ADDING APT FOR PHP'
+  - printf '=======\n\n'
+  - |
+    sudo curl -fsSL https://packages.sury.org/php/apt.gpg | \
+    sudo gpg --dearmor | \
+    sudo tee /usr/share/keyrings/php.gpg > /dev/null
+  - |
+    sudo echo "deb [arch=$(dpkg --print-architecture) \
+    signed-by=/usr/share/keyrings/php.gpg] \
+    https://packages.sury.org/php/ \
+    $(lsb_release -cs) main" |\
+    sudo tee /etc/apt/sources.list.d/php.list
+  - apt update -yq
+
   ## TODO: this is a good idea but maybe paranoid, but definitely a PITA during development
   # - printf '\n\n=======\n'
   # - echo 'CHANGE PASSWDS'
